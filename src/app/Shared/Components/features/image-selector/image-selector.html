@@ -1,0 +1,60 @@
+@if(showImageSelector())
+{
+
+<div class="image-selector-overlay">
+  <div class="image-selector-container col-12 col-md-8 col-lg-6">
+    
+    <button (click)="hideImageSelector()" type="button" class="close-overlay-btn">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="form-card shadow-lg">
+      <div class="form-header">
+        <h2 class="mb-0">SELECT / UPLOAD IMAGE</h2>
+      </div>
+      
+      <div class="form-body p-4 p-md-5">
+        <form [formGroup]="imageSelectorUploadForm" (ngSubmit)="onSubmit()">
+          
+          <div class="upload-drop-zone mb-4" >
+            <input type="file" (change)="onFileSelected($event)"  >
+
+               <div class="row">
+            @for(image of images(); track image.id)
+            {
+           
+              <div class="col-6 col-md-4 col-lg-3 text-center mb-3" (click)="onSelectImage(image)" >
+                <img style="height: 100px;" [src]="image.url" [alt]="image.fileName" class="img-fluid">
+                <span>{{image.fileName}}</span>
+              </div>
+         
+               }
+            </div>
+                 </div>
+         
+
+          <div class="row">
+            <div class="col-12 mb-3">
+              <label class="form-label">Image Title</label>
+              <input type="text" class="form-control custom-input"  formControlName="imageTitle" >
+            </div>
+
+            <div class="col-12 mb-4">
+              <label class="form-label">File Name</label>
+              <input type="text" class="form-control custom-input"  formControlName="fileName">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-register-solid w-100 py-3">
+            submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+}
+

@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand logo d-flex align-items-center" (click)="goHome()">
+      <svg class="logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 12 L24 8 L40 8 L48 12 L56 20 L48 26 L44 22 L44 56 L20 56 L20 22 L16 26 L8 20 Z" fill="currentColor"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-main">HAHA T</span>
+        <span class="logo-sub">SHIRTS</span>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" (click)="goHome()">Home</a></li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['products/tshirts']">Products</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['trending']">Trending & sales</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['about']">About</a></li>
+
+        @if (showAdmin) {
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin Panel
+          </a>
+          <ul class="dropdown-menu border-0 shadow-sm">
+            <li><a class="dropdown-item" [routerLink]="['admin/category']">Category</a></li>
+            <li><a class="dropdown-item" [routerLink]="['admin/product']">Product</a></li>
+          </ul>
+        </li>
+      }
+      </ul>
+
+      <div class="nav-actions d-flex align-items-center gap-3">
+        <a [routerLink]="['cart']" class="nav-icon-link position-relative me-2">
+          <i class="bi bi-cart3 fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle cart-dot"></span>
+        </a>
+
+        @if (!username) {
+          <a class="btn btn-login-outline" [routerLink]="['login']">
+            <i class="bi bi-person-fill me-1"></i> Login
+          </a>
+          <a class="btn btn-register-solid" [routerLink]="['register']">
+            <i class="bi bi-pencil-square me-1"></i> Register
+          </a>
+        } @else {
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="bg-hero-orange text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 32px; height: 32px;">
+                <i class="bi bi-person"></i>
+              </div>
+              <span class="fw-semibold text-dark">{{ username }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+              <li>
+                <div class="dropdown-header text-muted">
+                  Signed in as <br><span class="text-dark fw-bold">{{ username }}</span>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bag me-2"></i> My Orders</a></li>
+              <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <button class="dropdown-item text-danger py-2" (click)="onLogout()">
+                  <i class="bi bi-box-arrow-right me-2"></i> Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</nav>

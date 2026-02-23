@@ -1,0 +1,81 @@
+<div class="main-content-wrapper container">
+  @if (productRespone()) {
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <div class="detail-image-wrapper">
+          <img
+            [src]="productRespone()?.featuredImageUrl"
+            alt="Product Name"
+            class="img-fluid main-detail-img"
+          />
+          <div class="detail-image-accent"></div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="product-info-panel">
+          <p class="detail-sub-desc">{{ productRespone()?.description }}</p>
+          <h1 class="detail-name">{{ productRespone()?.title }}</h1>
+          <div class="detail-price">${{ productRespone()?.price }}</div>
+
+          <hr class="my-4 border-2" />
+
+          <div class="selection-box p-4">
+            <div class="mb-4">
+              <label class="selection-label">Select Size</label>
+              <div class="d-flex flex-wrap gap-2">
+                @for (variant of displaySizes(); track variant.sizeId) {
+                  <button
+                    class="size-btn"
+                    [class.active]="selectedSizeId() === variant.sizeId"
+                    (click)="selectSize(variant.sizeId)"
+                  >
+                    {{ variant.sizeName }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="selection-label">Select Color</label>
+              <div class="d-flex flex-wrap gap-3">
+                @for (variant of displayColors(); track variant.colorId) {
+                  <div
+                    class="color-swatch"
+                    [class.active]="selectedColorId() === variant.colorId"
+                    [style.background-color]="variant.colorHex"
+                    (click)="selectColor(variant.colorId)"
+                    [title]="variant.colorName"
+                  ></div>
+                }
+                @if (selectedColorId() || selectedSizeId()) {
+                  <button class="btn btn-sm" (click)="resetSelection()">Reset</button>
+                }
+              </div>
+            </div>
+
+<div class="row g-3 align-items-end">
+  <div class="col-4 col-md-3">
+    <label class="selection-label">Qty</label>
+    <input 
+      type="number" 
+      class="form-control qty-input" 
+      #qtyInput 
+      value="1" 
+      min="1" />
+  </div>
+  <div class="col-8 col-md-9">
+    <button 
+      class="btn btn-hero-orange w-100 py-3" 
+      [disabled]="!selectedSizeId() || !selectedColorId()"
+      (click)="onSubmit(qtyInput.value)"> <i class="bi bi-cart3 me-2"></i> ADD TO CART
+    </button>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

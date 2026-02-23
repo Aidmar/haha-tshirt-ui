@@ -1,0 +1,71 @@
+/* --- 1. The Navbar Buffer --- */
+.main-content-wrapper {
+    /* Adjusted for 'Big' typography navbar height */
+    margin-top: 130px; 
+    margin-bottom: 50px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* --- 2. Typography & Titles --- */
+.category-title {
+    font-family: 'Tauri', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--black);
+    font-size: calc(1.5rem + 1vw); /* Scales based on screen size */
+}
+
+/* --- 3. Responsive Table Styling --- */
+.table-responsive-wrapper {
+    border: 2px solid var(--black);
+    background: var(--white);
+}
+
+.custom-theme-table {
+    margin-bottom: 0;
+    font-family: 'Tauri', sans-serif;
+    text-transform: uppercase;
+}
+
+.custom-theme-table thead th {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 1.2rem;
+    font-weight: bold;
+    border: none;
+    white-space: nowrap; /* Prevents header snapping on mobile */
+}
+
+.custom-theme-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.text-orange-link {
+    color: var(--orange);
+    font-weight: bold;
+}
+
+/* --- 4. Mobile Adjustments --- */
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        margin-top: 110px; /* Slightly less on mobile */
+    }
+
+    /* Make buttons full width on small screens if stacked */
+    .btn-register-solid {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .btn-group-responsive {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

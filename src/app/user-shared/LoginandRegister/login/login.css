@@ -1,0 +1,53 @@
+.auth-wrapper {
+  min-height: 90vh;
+  /* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
+  padding: 20px;
+}
+
+.auth-card {
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+/* Custom Input Styling */
+.input-group-text {
+  border-radius: 10px 0 0 10px;
+  border-color: #dee2e6;
+}
+
+.form-control {
+  border-radius: 0 10px 10px 0;
+  padding: 12px;
+  border-color: #dee2e6;
+}
+
+.form-control:focus {
+  border-color: #ff5733; /* Orange focus border */
+  box-shadow: none;
+}
+
+/* Button & Text Accents */
+.btn-hero-orange {
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-hero-orange:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  color: white;
+}
+
+.text-hero-orange {
+  color: #ff5733;
+}
+
+/* Responsive adjust */
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 2rem 1.5rem !important;
+  }
+}

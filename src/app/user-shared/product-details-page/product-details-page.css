@@ -1,0 +1,132 @@
+.main-content-wrapper {
+    margin-top: 140px;
+    padding-bottom: 100px;
+    font-family: 'Tauri', sans-serif;
+     animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Image Section --- */
+.detail-image-wrapper {
+    position: relative;
+    border: 4px solid var(--black);
+    padding: 20px;
+    background: #fff;
+}
+
+.main-detail-img {
+    width: 100%;
+    filter: drop-shadow(15px 15px 0px #eee);
+}
+
+.detail-image-accent {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 100%;
+    height: 100%;
+    border: 4px solid var(--orange);
+    z-index: -1;
+}
+
+/* --- Typography --- */
+.detail-sub-desc {
+    color: var(--orange);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.detail-name {
+    font-weight: 900;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--black);
+    line-height: 1;
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-top: 10px;
+}
+
+/* --- Selection Box Styles --- */
+.selection-box {
+    border: 3px solid var(--black);
+    background-color: #fdfdfd;
+}
+
+.selection-label {
+    display: block;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+/* Size Buttons */
+.size-btn {
+    border: 2px solid #ddd;
+    background: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.2s;
+    min-width: 60px;
+}
+
+.size-btn:hover, .size-btn.active {
+    border-color: var(--black);
+    background-color: var(--black);
+    color: rgb(0, 0, 0);
+}
+
+/* Color Swatches */
+.color-swatch {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s;
+}
+
+.color-swatch.active {
+    border-color: var(--orange);
+    transform: scale(1.2);
+}
+
+/* Quantity Input */
+.qty-input {
+    border: 2px solid var(--black);
+    border-radius: 0;
+    font-weight: bold;
+    height: 56px;
+    text-align: center;
+}
+
+/* Custom SweetAlert Neo-Brutalism Style */
+.my-swal-border {
+  border: 3px solid #000000 !important;
+  box-shadow: 8px 8px 0px #000000 !important;
+  border-radius: 0px !important; /* Sharp corners like your buttons */
+  font-family: 'Tauri', sans-serif !important;
+}
+
+/* Animate the icon */
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #ff6b00 !important;
+}
+.swal2-icon.swal2-success {
+  border-color: #ff6b00 !important;
+}
+
+/* --- Responsive --- */
+@media (max-width: 991px) {
+    .detail-name { font-size: 2.2rem; }
+    .main-content-wrapper { margin-top: 100px; }
+    .detail-image-wrapper { margin-bottom: 40px; }
+}

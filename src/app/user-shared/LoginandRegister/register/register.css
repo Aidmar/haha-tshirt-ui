@@ -1,0 +1,108 @@
+/* --- Modern Layout --- */
+.auth-wrapper {
+    min-height: 100vh;
+    background-color: #f9fafb; /* Soft, light gray background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif; /* Cleaner font feel */
+}
+
+/* --- The Card: Soft & Airy --- */
+.auth-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb; /* Very thin, light border */
+    border-radius: 16px; /* Smooth rounded corners */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.05); /* Soft, blurred shadow */
+    padding: 2.5rem !important;
+}
+
+/* --- Typography --- */
+h2 {
+    color: #111827;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.text-muted {
+    color: #6b7280 !important;
+    font-size: 0.95rem;
+}
+
+/* --- Modern Inputs --- */
+.input-group {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.input-group-text {
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    color: #9ca3af;
+    padding-left: 15px;
+}
+
+.form-control {
+    border: 1px solid #d1d5db;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color: #1f2937;
+}
+
+/* Blue/Orange focus ring instead of a heavy border */
+.form-control:focus {
+    border-color: #ff5733; 
+    box-shadow: 0 0 0 4px rgba(255, 87, 51, 0.1);
+    z-index: 3;
+}
+
+/* --- Hero Orange Button: Sleek & Clean --- */
+.btn-hero-orange {
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(255, 87, 51, 0.2);
+}
+
+.btn-hero-orange:hover:not(:disabled) {
+    background-color: #e64a19;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(255, 87, 51, 0.3);
+}
+
+.btn-hero-orange:disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* --- Validation Errors: Minimalist & Clean --- */
+.error-box {
+    color: #dc2626; /* Professional red */
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+    font-weight: 500;
+}
+
+/* Red glow only when there's an actual error and the user has touched the field */
+.ng-invalid.ng-touched {
+    border-color: #fca5a5 !important;
+}
+
+/* --- Link Styling --- */
+.text-hero-orange {
+    color: #ff5733;
+    transition: color 0.2s;
+}
+
+.text-hero-orange:hover {
+    color: #e64a19;
+}

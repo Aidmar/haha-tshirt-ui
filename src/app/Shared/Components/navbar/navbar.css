@@ -1,0 +1,253 @@
+:root {
+    --black: #180A01;
+    --white: #FFFFFF;
+    --orange: #FF5733;
+}
+/*      */
+
+/* logo */
+.logo {
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  color: #000;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-main {
+  font-weight: 900;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  color: #000;
+}
+
+.logo-sub {
+  font-size: 0.6rem;
+  letter-spacing: 6px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* .custom-navbar {
+  background: transparent;
+} */
+
+.navbar {
+    background-color: var(--white);
+    padding: 0.8rem 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--black) !important;
+}
+
+.nav-link {
+    /* color: var(--black) !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0 10px; */
+    color: var(--black) !important;
+    font-family: 'Tauri', sans-serif; 
+    font-weight: 900;                
+    font-size: 1.25rem;              
+    text-transform: uppercase;      
+    letter-spacing: 1px;
+    margin: 0 15px;                  
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;                     /* Thick underline */
+    bottom: -5px;
+    left: 0;
+    background-color: var(--orange);
+    transition: width 0.3s ease;
+}
+.nav-link:hover {
+    color: var(--orange) !important;
+    
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+.dropdown-menu {
+    border: 3px solid var(--black);   /* Thick bold border for dropdowns */
+    border-radius: 0;                /* Sharp edges match your buttons */
+    padding: 0;
+}
+
+.dropdown-item {
+    font-family: 'Tauri', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+}
+.dropdown-item:hover {
+    background-color: var(--black);
+    color: var(--white);
+}
+/* --- Action Colors & Buttons --- */
+
+/* 1. Cart Icon Color */
+.nav-icon-link {
+    font-size: 1.6rem;
+    color: var(--black);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-icon-link:hover {
+    color: var(--orange);
+    transform: scale(1.1);
+}
+
+.cart-dot {
+    background-color: var(--orange) !important;
+    width: 8px;
+    height: 8px;
+}
+
+/* 2. Login Button (The "Sophisticated" Outline) */
+.btn-login-outline {
+    color: var(--black);
+    border: 2px solid var(--black);
+    font-weight: bold;
+    border-radius: 50px;
+    padding: 0.5rem 1.4rem;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-login-outline:hover {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+/* 3. Register Button (The "Bold" Solid Orange) */
+.btn-register-solid {
+    background-color: var(--orange);
+    color: var(--white);
+    border: 2px solid var(--orange);
+    font-weight: bold;
+    border-radius: 50px;
+    padding: 0.5rem 1.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 87, 51, 0.3); /* Soft orange glow */
+}
+
+.btn-register-solid:hover {
+    background-color: #E64A19; /* Slightly darker orange */
+    border-color: #E64A19;
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 87, 51, 0.4);
+}
+
+.bg-hero-orange {
+  background-color: #ff6b00; /* Use your specific orange color code here */
+}
+
+#profileDropdown::after {
+  display: none; /* Removes the little arrow if it looks too crowded */
+}
+
+.dropdown-item:active {
+  background-color: #ff6b00;
+}
+
+.bg-hero-orange {
+  background-color: #ff6b00; /* Your brand orange */
+}
+
+.custom-navbar {
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+
+
+.btn-login-outline {
+  border: 2px solid #ff6b00;
+  color: #ff6b00;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-register-solid {
+  background-color: #ff6b00;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-register-solid:hover {
+  background-color: #e66000;
+  color: white;
+}
+
+/* Remove the default arrow from the profile dropdown */
+#profileDropdown::after {
+  display: none;
+}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Mobile Fix for Colored Buttons --- */
+@media (max-width: 991px) {
+    .nav-link {
+        font-size: 1.5rem;           /* Even bigger on mobile for easy tapping */
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .nav-link::after {
+        display: none;               /* Remove underline on mobile stack */
+    }
+    .nav-actions {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+        
+    }
+
+    .btn-login-outline, .btn-register-solid {
+        width: 90%; /* Large tap area */
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .nav-icon-link {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+      .custom-navbar .navbar-collapse {
+    background-color: #ffffff;   
+    padding: 20px;
+    width: 100%;
+
+  }
+
+
+
+    
+}

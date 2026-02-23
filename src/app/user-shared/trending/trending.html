@@ -1,0 +1,80 @@
+<div class="main-content-wrapper container-fluid px-lg-5">
+  <div class="row g-4">
+    
+    <aside class="col-lg-3">
+      <div class="filter-sidebar">
+        <h4 class="filter-title">Hottest Picks</h4>
+        <div class="filter-options">
+            
+            <div class="form-check custom-check">
+              <input class="form-check-input" type="radio" name="cat" id="all"
+                   [checked]="selectedCategoryId() === 'all'"
+                   (change)="onCategoryChange('all')" />
+               <label class="form-check-label" for="all">Show All Deals</label>
+            </div>
+
+            @for (category of specialCategories(); track category.id) {
+            <div class="form-check custom-check">
+              <input class="form-check-input" type="radio" name="cat" id="{{ category.id }}"
+                   [checked]="selectedCategoryId() === category.id.toString()"
+                   (change)="onCategoryChange(category.id)" />
+              <label class="form-check-label" for="{{category.id}}">{{ category.name }}</label>
+            </div>
+            }
+        </div>
+      </div>
+    </aside>
+
+    <main class="col-lg-9">
+      <div class="row g-4">
+        @for (product of filteredProducts(); track product.id) {
+          <div class="col-12 col-md-6 col-xl-4">
+            <div class="catalog-card">
+              
+              <a [routerLink]="['/products/productDetails' , product.id]">
+                <div class="product-image-box">
+                  
+                  <div class="badge-overlay">
+                    @for (c of product.categories; track c.id) {
+                        @if ($any(c.name).toString().toLowerCase().includes('trending')) {
+                            <div class="badge-item trending-badge">🔥 Trending</div>
+                        }
+                    }
+                    
+                    @if ($any(product).originalPrice && $any(product).originalPrice > product.price) {
+                        <div class="badge-item sale-badge">
+                            -{{ getDiscount($any(product).originalPrice, product.price) }}%
+                        </div>
+                    }
+                  </div>
+
+                  <img [src]="product.featuredImageUrl" alt="Product" class="img-fluid" />
+                
+                </div>
+              </a>
+
+              <div class="product-details p-3">
+                <h5 class="product-name">{{ product.title }}</h5>
+                <p class="product-desc text-truncate-2">{{ product.description }}</p>
+                
+                <div class="d-flex justify-content-between align-items-end mt-3">
+                  <div class="price-stack">
+                    @if ($any(product).originalPrice && $any(product).originalPrice > product.price) {
+                        <span class="old-price">${{ $any(product).originalPrice }}</span>
+                        <span class="product-price sale-price">${{ product.price }}</span>
+                    } @else {
+                        <span class="product-price">${{ product.price }}</span>
+                    }
+                  </div>
+                  <button class="btn btn-hero-black btn-sm">Add to cart</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        }
+      </div>
+    </main>
+
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="main-content-wrapper container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <a
+        class="text-decoration-none text-black fw-bold mb-3 d-inline-block"
+        [routerLink]="['/admin/category']"
+      >
+        <i class="bi bi-arrow-left"></i> BACK TO LIST
+      </a>
+
+      <div class="form-card shadow-sm">
+        <div class="form-header">
+          <h2 class="mb-0">Create Category</h2>
+        </div>
+
+        <div class="form-body p-4 p-md-5">
+          <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+              <label for="name" class="form-label">Category Name</label>
+              <input
+                type="text"
+                class="form-control custom-input"
+                placeholder="e.g. T-shirt"
+                formControlName="categoryName"
+              />
+              @if (
+                categoryNameformControl.touched && categoryNameformControl.hasError('required')
+              ) {
+                <p class="text-danger text-small">Category Name is required.</p>
+              }
+              @if (
+                categoryNameformControl.touched && categoryNameformControl.hasError('maxlength')
+              ) {
+                <p class="text-danger text-small">Category Name cannot exceed 50 characters.</p>
+              }
+            </div>
+
+            <div class="mb-4">
+              <label for="urlHandle" class="form-label">URL Handle</label>
+              <input
+                type="text"
+                class="form-control custom-input"
+                placeholder="e.g. t-shirt-deals"
+                formControlName="urlHandle"
+              />
+              @if (
+                urlHandleformControl.touched && urlHandleformControl.hasError('required')
+              ) {
+                <p class="text-danger text-small">URL Handle is required.</p>
+              }
+              @if (
+                urlHandleformControl.touched && urlHandleformControl.hasError('maxlength')
+              ) {
+                <p class="text-danger text-small">URL Handle cannot exceed 50 characters.</p>
+              }
+            </div>
+
+            <div class="mt-5">
+              <button type="submit" class="btn btn-register-solid w-100 py-3" [disabled]="addCategoryForm.valid === false">SAVE CATEGORY</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

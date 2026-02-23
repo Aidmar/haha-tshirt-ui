@@ -1,0 +1,72 @@
+<div class="main-content-wrapper container-fluid px-lg-5">
+  <div class="row g-4">
+    <aside class="col-lg-3">
+      <div class="filter-sidebar shadow-sm">
+        <h4 class="filter-title">Categories</h4>
+        <div class="filter-options">
+            
+            <div class="form-check custom-check">
+              <input
+               class="form-check-input"
+                type="radio"
+                 name="cat"
+                  id="all"
+                   [checked]="selectedCategoryId() === 'all'"
+                   (change)="onCategoryChange('all')"
+                    />
+              
+               <label class="form-check-label" for="all">All Products</label>
+            </div>
+            @for (category of categories(); track category.id) {
+            <div class="form-check custom-check">
+              <input
+               class="form-check-input"
+                type="radio"
+                 name="cat"
+                 id="{{ category.id }}"
+                 [checked]="selectedCategoryId() === category.id.toString()"
+                 (change)="onCategoryChange(category.id)"
+                 />
+
+
+              <label class="form-check-label" for="{{category.id}}">{{ category.name }}</label>
+            </div>
+          }
+        </div>
+
+        <h4 class="filter-title mt-5">Sort By</h4>
+        <select class="form-select custom-select">
+          <option selected>Newest</option>
+          <option value="1">Price: Low to High</option>
+          <option value="2">Price: High to Low</option>
+        </select>
+      </div>
+    </aside>
+
+    <main class="col-lg-9">
+      <div class="row g-4">
+        @for (product of filteredProducts(); track product.id) {
+          <div class="col-12 col-md-6 col-xl-4">
+            <div class="catalog-card">
+              <a [routerLink]="['/products/productDetails' , product.id]">
+                <div class="product-image-box">
+                  <img [src]="product.featuredImageUrl" alt="Product Name" class="img-fluid" />
+                  <div class="hover-action"></div>
+                </div>
+              </a>
+              <p></p>
+              <div class="product-details p-3">
+                <h5 class="product-name">{{ product.title }}</h5>
+                <p class="product-desc text-truncate-2">{{ product.description }}</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="product-price">${{ product.price }}</span>
+                  <button class="btn btn-hero-black btn-sm" >Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </main>
+  </div>
+</div>

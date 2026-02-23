@@ -1,0 +1,178 @@
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --orange: #ff6b00;
+}
+
+.main-content-wrapper {
+    margin-top: 140px;
+    padding-bottom: 80px;
+    font-family: 'Tauri', sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Filter Sidebar --- */
+.filter-sidebar {
+    background-color: var(--white);
+    border: 3px solid var(--black);
+    padding: 25px;
+    position: sticky;
+    top: 160px;
+}
+
+.filter-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    border-bottom: 3px solid var(--orange);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* --- Radio Styling (Exactly as requested) --- */
+.custom-check {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.custom-check .form-check-input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--black);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    margin-top: 0;
+}
+
+.custom-check:hover .form-check-input {
+    border-color: var(--orange);
+    transform: scale(1.1);
+}
+
+.custom-check .form-check-input:checked {
+    background-color: rgb(173, 173, 173); /* The grey fill */
+    border-color: var(--black);
+    background-image: none;
+    box-shadow: 3px 3px 0px var(--black);
+}
+
+.custom-check .form-check-input:checked + .form-check-label {
+    color: var(--orange);
+    font-weight: 900;
+}
+
+.custom-check .form-check-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* --- Catalog Cards --- */
+.catalog-card {
+    border: 2px solid #eee;
+    background: white;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.catalog-card:hover {
+    border-color: var(--black);
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0px var(--black);
+}
+
+.product-image-box {
+    position: relative;
+    background: #f9f9f9;
+    overflow: hidden;
+}
+
+/* --- Badges --- */
+.badge-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+}
+
+.badge-item {
+    padding: 5px 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    border: 2px solid var(--black);
+    box-shadow: 3px 3px 0px var(--black);
+}
+
+.trending-badge { background: var(--orange); color: var(--white); }
+.sale-badge { background: #2ed573; color: var(--black); }
+
+/* --- Hover View --- */
+.hover-action {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-btn {
+    background: var(--white);
+    color: var(--black);
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 2px solid var(--black);
+    box-shadow: 4px 4px 0px var(--black);
+}
+
+.catalog-card:hover .hover-action {
+    opacity: 1;
+}
+
+/* --- Prices & Buttons --- */
+.price-stack { display: flex; flex-direction: column; }
+.old-price { font-size: 0.85rem; color: #aaa; text-decoration: line-through; font-weight: bold; }
+.product-price { font-weight: 900; font-size: 1.3rem; color: var(--black); }
+.sale-price { color: var(--orange); }
+
+.btn-hero-black {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 0;
+    padding: 8px 20px;
+}
+
+.btn-hero-black:hover {
+    background: var(--orange);
+    color: var(--black);
+}
+
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* --- Responsive --- */
+@media (max-width: 991px) {
+    .filter-sidebar { position: static; margin-bottom: 30px; }
+}

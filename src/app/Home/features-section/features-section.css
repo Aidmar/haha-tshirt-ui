@@ -1,0 +1,93 @@
+/* --- Base Card Styles --- */
+.promo-card {
+    position: relative;
+    min-height: 500px; /* Adjust height for laptop/PC */
+    display: flex;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* --- Background Images (Replace with your paths) --- */
+.trending-bg {
+    background-image: url('/assets/test1.jpg');
+
+    
+}
+
+.sales-bg {
+    background-image: url('/assets/test2.jpg');
+}
+
+/* --- Overlay Logic (The Color Layer) --- */
+.promo-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+/* Left side color with transparency */
+.overlay-teal {
+    /* background-color: rgba(63, 63, 63, 0.85);  */
+        background-color: rgba(0, 0, 0, 0.85); 
+}
+
+/* Right side color with transparency */
+.overlay-beige {
+    background-color: rgba(26, 26, 26, 0.85); 
+      /* background-color: rgba(26, 26, 26, 0.85);  */
+}
+
+/* Hover Effect: Lower opacity to show more image */
+
+
+/* --- Typography (Matching Tauri Theme) --- */
+.promo-title {
+    font-family: 'Tauri', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.promo-text {
+    font-family: 'Tauri', sans-serif;
+    color: #ffffff;
+    max-width: 450px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Reusing your black button style */
+.btn-hero-black {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-family: 'Tauri', sans-serif;
+    font-weight: 900;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-black:hover {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* --- Responsive Behavior --- */
+@media (max-width: 768px) {
+    .promo-card {
+        min-height: 400px;
+    }
+    
+    .promo-title {
+        font-size: 2.8rem;
+    }
+}

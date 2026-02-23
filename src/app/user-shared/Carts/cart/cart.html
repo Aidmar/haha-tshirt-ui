@@ -1,0 +1,78 @@
+<div class="container py-5 main-content-wrapper mt-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="cart-card p-4">
+        <h3 class="fw-bold mb-4 uppercase">Shopping Cart ({{ cartItems().length }})</h3>
+
+        @for (item of cartItems(); track item.id) {
+        <div class="cart-item d-flex align-items-center py-4 border-bottom">
+          <div class="cart-img-wrapper border-bold">
+            <img [src]="item.product.featuredImageUrl" class="img-fluid" alt="Product Image">
+          </div>
+
+          <div class="ms-3 flex-grow-1">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="product-title mb-1 fw-black">{{ item.product.title }}</h5>
+              <button (click)="removeItem(item.id)" class="btn-remove" title="Remove Item">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+            
+            <p class="mb-2 text-muted small uppercase">
+              Size: <span class="fw-bold text-dark">{{ item.productVariant.sizeName }}</span> | 
+              Color: <span class="fw-bold text-dark">{{ item.productVariant.colorName }}</span> 
+            </p>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <div class="qty-selector border-bold">
+                <span class="px-3">Qty: <strong>{{ item.quantity }}</strong></span>
+              </div>
+              <span class="price-text fw-black fs-5">${{ item.product.price * item.quantity }}</span>
+            </div>
+          </div>
+        </div>
+        } @empty {
+        <div class="text-center py-5">
+          <i class="bi bi-cart-x display-1 text-muted"></i>
+          <p class="text-muted fs-4 mt-3">Your cart is feeling lonely.</p>
+          <a class="btn btn-hero-orange mt-2" [routerLink]="['/products/tshirts']">START SHOPPING</a>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="summary-card p-4 sticky-top" style="top: 100px;">
+        <h4 class="fw-black mb-4 uppercase">Order Summary</h4>
+        
+        <div class="summary-row d-flex justify-content-between mb-2">
+          <span>Subtotal</span>
+          <span>${{ totalPrice() }}</span>
+        </div>
+        <div class="summary-row d-flex justify-content-between mb-2">
+          <span>Shipping</span>
+          <span class="text-success fw-bold">FREE</span>
+        </div>
+        <div class="summary-row d-flex justify-content-between mb-3">
+          <span>Taxes</span>
+          <span>Calculated at checkout</span>
+        </div>
+
+        <hr class="border-2 opacity-100">
+
+        <div class="d-flex justify-content-between mb-4">
+          <span class="fw-black fs-4 uppercase">Total</span>
+          <span class="fw-black fs-4 text-hero-orange">${{ totalPrice() }}</span>
+        </div>
+
+        <button class="btn btn-checkout w-100 py-3 fw-black mb-3">
+          PROCEED TO CHECKOUT
+        </button>
+        
+        <p class="text-center small text-muted">
+          <i class="bi bi-shield-check"></i> Secure Checkout Guaranteed
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
