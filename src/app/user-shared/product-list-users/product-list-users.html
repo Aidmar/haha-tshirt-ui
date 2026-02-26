@@ -14,7 +14,6 @@
                    [checked]="selectedCategoryId() === 'all'"
                    (change)="onCategoryChange('all')"
                     />
-              
                <label class="form-check-label" for="all">All Products</label>
             </div>
             @for (category of categories(); track category.id) {

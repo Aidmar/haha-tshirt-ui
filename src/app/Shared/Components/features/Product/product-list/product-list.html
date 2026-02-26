@@ -31,7 +31,16 @@
                          style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"/>
                   </td>
                   <td class="fw-bold text-nowrap">{{ product.title }}</td>
-                  <td class="text-orange-link fw-bold">${{ product.price }}</td>
+                  
+                  <td class="text-orange-link fw-bold">
+                    @if (product.originalPrice && product.originalPrice > product.price) {
+                      <div class="small text-decoration-line-through text-muted">${{ product.originalPrice }}</div>
+                      <div>${{ product.price }}</div>
+                    } @else {
+                      ${{ product.price }}
+                    }
+                  </td>
+
                   <td>
                     <div class="d-flex flex-column gap-1">
                       @for (variant of product.variants; track $index) {
@@ -64,10 +73,15 @@
                       }
                     </div>
                   </td>
+
                   <td class="text-center">
                     <div class="btn-group-responsive">
-                      <a class="btn btn-outline-custom btn-sm me-1" [routerLink]="['/admin/product/edit', product.id]">EDIT</a>
-                      <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct(product.id)">DEL</button>
+                      @if (product.id !== 'p1' && product.id !== 'p2' && product.id !== 'p3'&& product.id !== 'p4' && product.id !== 'p5' && product.id !== 'p6' && product.id !== 'p7' && product.id !== 'p8' && product.id !== 'p9') {
+                        <a class="btn btn-outline-custom btn-sm me-1" [routerLink]="['/admin/product/edit', product.id]">EDIT</a>
+                        <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct(product.id)">DEL</button>
+                      } @else {
+                        <span class="badge bg-secondary small text-uppercase">System Item</span>
+                      }
                     </div>
                   </td>
                 </tr>

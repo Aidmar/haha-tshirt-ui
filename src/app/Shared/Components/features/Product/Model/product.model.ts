@@ -44,19 +44,35 @@ export interface product  {
 }
 
 
+// export interface EditProductDto {
+//       id: string;  
+//     title : string;
+//     price : number | null; 
+//     description : string;
+//     featuredImageUrl : string;
+//     urlHandle : string;
+//     categories : string[];
+//     variants: {
+//     colorId: string;
+//     sizeId: string;
+//     quantity: number;
+//   }[];
+// }
+
 export interface EditProductDto {
-      id: string;  
+    id: string;  
     title : string;
     price : number | null; 
+    originalPrice?: number; // Added this line
     description : string;
     featuredImageUrl : string;
     urlHandle : string;
     categories : string[];
     variants: {
-    colorId: string;
-    sizeId: string;
-    quantity: number;
-  }[];
+      colorId: string;
+      sizeId: string;
+      quantity: number;
+    }[];
 }
 
 export interface Color {

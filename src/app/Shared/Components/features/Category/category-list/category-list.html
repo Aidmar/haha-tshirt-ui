@@ -1,60 +1,57 @@
 <div class="main-content-wrapper container-fluid px-4 px-lg-5">
-  
   <div class="row justify-content-center">
     <div class="col-12 col-xl-10">
       
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
         <h2 class="category-title mb-0">Category Management</h2>
-        
         <a class="btn btn-register-solid px-4 py-2" [routerLink]="['/admin/category/AddCategory']" >
           <i class="bi bi-plus-lg me-2"></i> Add New Category
         </a>
       </div>
 
       <div class="table-responsive-wrapper shadow-sm">
-        @if(isLoading())
-        {
-            <p>Loading categories...</p>
+        @if(isLoading()) {
+            <p class="p-4">Loading categories...</p>
         }
-        @if(isError())
-        {
-            <p>No categories available.</p>
+        @else if(isError()) {
+            <p class="p-4">No categories available.</p>
         }
-        @else{
- 
-        <div class="table-responsive">
-          <table class="table custom-theme-table align-middle">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Category Name</th>
-                <th>URL Handle</th>
-                <th class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+        @else {
+          <div class="table-responsive">
+            <table class="table custom-theme-table align-middle">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Category Name</th>
+                  <th>URL Handle</th>
+                  <th class="text-center">Actions</th>
+
+                </tr>
+              </thead>
+              <tbody>
                 @for (category of categories(); track category.id) {
-                    
-              <tr>
-                <td class="text-muted">#{{category.id}}</td>
-                <td class="fw-bold">{{category.name}}</td>
-                <td class="text-lowercase text-orange-link">{{category.urlHandle}}</td>
-                <td class="text-center">
-                  <div class="btn-group-responsive">
-                    <a class="btn btn-outline-custom btn-sm me-2" [routerLink]="['/admin/category/EditCategory', category.id]">Edit</a>
-                    <a class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category.id)">Delete</a>
-                  </div>
-                </td>
-              </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-    }
-
-
+                  <tr>
+                    <td class="text-muted">#{{category.id}}</td>
+                    <td class="fw-bold">{{category.name}}</td>
+                    <td class="text-lowercase text-orange-link">{{category.urlHandle}}</td>
+                    <td class="text-center">
+                      <div class="btn-group-responsive">
+                        <a class="btn btn-outline-custom btn-sm me-2" [routerLink]="['/admin/category/EditCategory', category.id]">Edit</a>
+                        
+                        @if (category.id !== '1' && category.id !== '2' && category.id !== '3' && category.id !== '4' && category.id !== '5' ) {
+                          <a class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category.id)">Delete</a>
+                        } @else {
+                          <span class="badge bg-secondary text-uppercase" style="font-size: 0.6rem; letter-spacing: 1px;">System</span>
+                        }
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
       </div>
-
     </div>
   </div>
 </div>

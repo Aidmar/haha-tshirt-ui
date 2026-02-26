@@ -1,52 +1,56 @@
 /* --- Base Card Styles --- */
 .promo-card {
     position: relative;
-    min-height: 500px; /* Adjust height for laptop/PC */
-    display: flex;
+    min-height: 500px;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-     animation: fadeIn 0.5s ease-in-out;
-}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-/* --- Background Images (Replace with your paths) --- */
-.trending-bg {
-    background-image: url('/assets/test1.jpg');
-
-    
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.sales-bg {
-    background-image: url('/assets/test2.jpg');
-}
-
-/* --- Overlay Logic (The Color Layer) --- */
-.promo-overlay {
+/* Image behaves like background cover */
+.promo-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Overlay Layer */
+.promo-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     transition: all 0.4s ease;
 }
 
-/* Left side color with transparency */
+/* Dark overlays */
 .overlay-teal {
-    /* background-color: rgba(63, 63, 63, 0.85);  */
-        background-color: rgba(0, 0, 0, 0.85); 
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
-/* Right side color with transparency */
 .overlay-beige {
-    background-color: rgba(26, 26, 26, 0.85); 
-      /* background-color: rgba(26, 26, 26, 0.85);  */
+    background-color: rgba(26, 26, 26, 0.85);
 }
 
-/* Hover Effect: Lower opacity to show more image */
+/* Hover Effect */
+.promo-card:hover .promo-overlay {
+    background-color: rgba(0, 0, 0, 0.65);
+}
 
+/* Content */
+.promo-content {
+    position: relative;
+    z-index: 3;
+}
 
-/* --- Typography (Matching Tauri Theme) --- */
+/* Typography */
 .promo-title {
     font-family: 'Tauri', sans-serif;
     font-weight: 900;
@@ -65,9 +69,9 @@
     line-height: 1.6;
 }
 
-/* Reusing your black button style */
+/* Button */
 .btn-hero-black {
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     color: #000000;
     border: 1px solid #ffffff;
     font-family: 'Tauri', sans-serif;
@@ -81,12 +85,18 @@
     color: #ffffff;
 }
 
-/* --- Responsive Behavior --- */
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .promo-card {
         min-height: 400px;
     }
-    
+
     .promo-title {
         font-size: 2.8rem;
     }

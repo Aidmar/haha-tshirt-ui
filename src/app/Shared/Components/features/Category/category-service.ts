@@ -6,7 +6,7 @@ import { Category, createCategory, UpdateCategory } from './Model/category.model
   providedIn: 'root'
 })
 export class CategoryService {
-  private categoryList = signal<Category[]>([]);
+ private categoryList = signal<Category[]>([]);
   addCategoryStatus = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
   updateCategoryStatus = signal<'idle' | 'loading' | 'error' | 'success'>('idle');
 
@@ -16,12 +16,17 @@ export class CategoryService {
 
   private loadFromStorage() {
     const saved = localStorage.getItem('demo_categories');
-    if (saved) {
-      this.categoryList.set(JSON.parse(saved));
+    const parsed = saved ? JSON.parse(saved) : [];
+
+    if (parsed.length>0) {
+this.categoryList.set(parsed);
     } else {
       const seedData: Category[] = [
         { id: '1', name: 'Trending', urlHandle: 'trending' },
-        { id: '2', name: 'Sale', urlHandle: 'sale' }
+        { id: '2', name: 'Sale', urlHandle: 'sale' },
+        { id: '3', name: 'T-shirt', urlHandle: 'T-shirt' },
+        { id: '4', name: 'Hoddies', urlHandle: 'Hoddies' },
+        { id: '5', name: 'Hat', urlHandle: 'Hat' },
       ];
       this.categoryList.set(seedData);
       this.saveToStorage();
@@ -40,15 +45,12 @@ export class CategoryService {
     };
   }
 
-
   getCategoryById(id: string | null): Category | undefined {
     return this.categoryList().find(c => c.id === id);
   }
 
-  
   updateCategoryById(id: string, updateDto: UpdateCategory) {
     this.updateCategoryStatus.set('loading');
-
     setTimeout(() => {
       this.categoryList.update(list => 
         list.map(cat => cat.id === id ? { ...cat, name: updateDto.name, urlHandle: updateDto.urlHandle } : cat)
@@ -73,10 +75,15 @@ export class CategoryService {
   }
 
   deleteCategory(id: string): Observable<void> {
+    // PROTECT SYSTEM CATEGORIES (1 and 2)
+    if (id === '1' || id === '2' || id === '3' || id === '4' || id === '5' ) {
+      return of(undefined);
+    }
+
     this.categoryList.update(list => list.filter(cat => cat.id !== id));
     this.saveToStorage();
     return of(undefined);
   }
 
-  
+
 }
