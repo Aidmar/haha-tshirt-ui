@@ -33,8 +33,8 @@ export interface product  {
     id : string;
     title : string;
     price : number; 
-    originalPrice?: number; // <--- NEW: To calculate the discount
-    isTrending?: boolean;   // <--- NEW: To trigger the trending badge
+    originalPrice?: number; 
+    isTrending?: boolean;   
     description : string;
     featuredImageUrl : string;
     urlHandle : string;

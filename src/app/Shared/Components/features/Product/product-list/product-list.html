@@ -1,11 +1,8 @@
 <div class="main-content-wrapper container-fluid px-4 px-lg-5">
   <div class="row justify-content-center">
     <div class="col-12">
-      <div
-        class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3"
-      >
-        <h2 class="category-title mb-0">Product Inventory</h2>
-
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+        <h2 class="category-title mb-0 text-uppercase fw-900">Product Inventory</h2>
         <a class="btn btn-register-solid px-4 py-2" [routerLink]="['/admin/product/add']">
           <i class="bi bi-plus-circle-fill me-2"></i> ADD NEW PRODUCT
         </a>
@@ -19,7 +16,7 @@
                 <th>Image</th>
                 <th>Title</th>
                 <th>Price</th>
-                <th>Inventory (Color/Size/Qty)</th>
+                <th>Inventory</th>
                 <th>Description</th>
                 <th>URL Handle</th>
                 <th>Categories</th>
@@ -30,54 +27,53 @@
               @for (product of response(); track product.id) {
                 <tr>
                   <td>
-                    <img
-                      [src]="product.featuredImageUrl"
-                      alt="product"
-                      class="product-img-preview"
-                    />
+                    <img [src]="product.featuredImageUrl" alt="product" class="product-img-preview" 
+                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"/>
                   </td>
                   <td class="fw-bold text-nowrap">{{ product.title }}</td>
-
-                  <td class="text-orange-link">${{ product.price }}</td>
+                  <td class="text-orange-link fw-bold">${{ product.price }}</td>
                   <td>
-        <div class="d-flex flex-column gap-1">
-          @for (variant of product.variants; track $index) {
-            <div class="d-flex align-items-center gap-2 border-bottom border-light pb-1">
-              <span 
-                class="rounded-circle border" 
-                [style.backgroundColor]="variant.colorHex" 
-                style="width: 12px; height: 12px; display: inline-block;"
-                [title]="variant.colorName">
-              </span>
-              
-              <span class="small fw-bold">{{ variant.sizeName }}:</span>
-              <span class="badge rounded-pill bg-light text-dark border small">
-                {{ variant.quantity }} in stock
-              </span>
-            </div>
-          } @empty {
-            <span class="text-muted small">No variants</span>
-          }
-        </div>
-      </td>
-                  <td>
-                    <div class="text-truncate-2">{{ product.description }}</div>
+                    <div class="d-flex flex-column gap-1">
+                      @for (variant of product.variants; track $index) {
+                        <div class="d-flex align-items-center gap-2 border-bottom border-light pb-1">
+                          <span class="rounded-circle border" 
+                                [style.backgroundColor]="variant.colorHex" 
+                                style="width: 12px; height: 12px; display: inline-block;"
+                                [title]="variant.colorName">
+                          </span>
+                          <span class="small fw-bold">{{ variant.sizeName }}:</span>
+                          <span class="badge rounded-pill bg-light text-dark border small">
+                            {{ variant.quantity }}
+                          </span>
+                        </div>
+                      } @empty {
+                        <span class="text-muted small">No variants</span>
+                      }
+                    </div>
                   </td>
-                  <td class="text-lowercase small">{{ product.urlHandle }}</td>
-                  @for (category of product.categories; track category.id) {
-                    <td>
-                      <span class="badge text-bg-secondary">
-                        {{ category.name ? category.name : 'No Category' }}
-                      </span>
-                    </td>
-                  }
-
+                  <td>
+                    <div class="text-truncate-2 small" style="max-width: 200px;">{{ product.description }}</div>
+                  </td>
+                  <td class="text-lowercase small text-muted">{{ product.urlHandle }}</td>
+                  <td>
+                    <div class="d-flex flex-wrap gap-1">
+                      @for (category of product.categories; track category.id) {
+                        <span class="badge text-bg-secondary small">{{ category.name }}</span>
+                      } @empty {
+                        <span class="text-muted small">None</span>
+                      }
+                    </div>
+                  </td>
                   <td class="text-center">
                     <div class="btn-group-responsive">
                       <a class="btn btn-outline-custom btn-sm me-1" [routerLink]="['/admin/product/edit', product.id]">EDIT</a>
-                      <a class="btn btn-outline-danger btn-sm" (click)="deleteProduct(product.id)">DEL</a>
+                      <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct(product.id)">DEL</button>
                     </div>
                   </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="8" class="text-center py-5 text-muted">No products found. Add your first product!</td>
                 </tr>
               }
             </tbody>

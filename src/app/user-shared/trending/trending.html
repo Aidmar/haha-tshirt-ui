@@ -1,24 +1,24 @@
-<div class="main-content-wrapper container-fluid px-lg-5">
+<div class="main-content-wrapper container-fluid px-lg-5 py-5">
   <div class="row g-4">
     
     <aside class="col-lg-3">
-      <div class="filter-sidebar">
-        <h4 class="filter-title">Hottest Picks</h4>
+      <div class="filter-sidebar p-4 bg-white  border-2 border-dark shadow-sm">
+        <h4 class="fw-900 text-uppercase mb-4">Hottest Picks</h4>
         <div class="filter-options">
             
-            <div class="form-check custom-check">
+            <div class="form-check custom-check mb-3">
               <input class="form-check-input" type="radio" name="cat" id="all"
                    [checked]="selectedCategoryId() === 'all'"
                    (change)="onCategoryChange('all')" />
-               <label class="form-check-label" for="all">Show All Deals</label>
+               <label class="form-check-label fw-bold text-uppercase" for="all">Show All Deals</label>
             </div>
 
             @for (category of specialCategories(); track category.id) {
-            <div class="form-check custom-check">
+            <div class="form-check custom-check mb-3">
               <input class="form-check-input" type="radio" name="cat" id="{{ category.id }}"
                    [checked]="selectedCategoryId() === category.id.toString()"
                    (change)="onCategoryChange(category.id)" />
-              <label class="form-check-label" for="{{category.id}}">{{ category.name }}</label>
+              <label class="form-check-label fw-bold text-uppercase" for="{{category.id}}">{{ category.name }}</label>
             </div>
             }
         </div>
@@ -29,48 +29,51 @@
       <div class="row g-4">
         @for (product of filteredProducts(); track product.id) {
           <div class="col-12 col-md-6 col-xl-4">
-            <div class="catalog-card">
+            <div class="catalog-card border-bold bg-white h-100">
               
-              <a [routerLink]="['/products/productDetails' , product.id]">
-                <div class="product-image-box">
+              <a [routerLink]="['/products/productDetails', product.id]">
+                <div class="product-image-box position-relative overflow-hidden">
                   
-                  <div class="badge-overlay">
+                  <div class="badge-overlay position-absolute top-0 start-0 p-2 d-flex flex-column gap-1">
                     @for (c of product.categories; track c.id) {
-                        @if ($any(c.name).toString().toLowerCase().includes('trending')) {
-                            <div class="badge-item trending-badge">🔥 Trending</div>
+                        @if (c.name.toLowerCase().includes('trending')) {
+                            <div class="badge-item trending-badge bg-dark text-white px-2 py-1 small fw-bold">🔥 TRENDING</div>
                         }
                     }
                     
-                    @if ($any(product).originalPrice && $any(product).originalPrice > product.price) {
-                        <div class="badge-item sale-badge">
-                            -{{ getDiscount($any(product).originalPrice, product.price) }}%
+                    @if (product.originalPrice && product.originalPrice > product.price) {
+                        <div class="badge-item sale-badge bg-danger text-white px-2 py-1 small fw-bold">
+                          -{{ getDiscount(product.originalPrice, product.price) }}% OFF
                         </div>
                     }
                   </div>
 
-                  <img [src]="product.featuredImageUrl" alt="Product" class="img-fluid" />
-                
+                  <img [src]="product.featuredImageUrl" alt="Product" class="img-fluid w-100" style="height: 300px; object-fit: cover;" />
                 </div>
               </a>
 
               <div class="product-details p-3">
-                <h5 class="product-name">{{ product.title }}</h5>
-                <p class="product-desc text-truncate-2">{{ product.description }}</p>
+                <h5 class="product-name fw-900 text-uppercase mb-1">{{ product.title }}</h5>
+                <p class="product-desc text-muted small text-truncate-2 mb-3">{{ product.description }}</p>
                 
-                <div class="d-flex justify-content-between align-items-end mt-3">
-                  <div class="price-stack">
-                    @if ($any(product).originalPrice && $any(product).originalPrice > product.price) {
-                        <span class="old-price">${{ $any(product).originalPrice }}</span>
-                        <span class="product-price sale-price">${{ product.price }}</span>
+                <div class="d-flex justify-content-between align-items-end mt-auto">
+                  <div class="price-stack d-flex flex-column">
+                    @if (product.originalPrice && product.originalPrice > product.price) {
+                        <span class="old-price text-decoration-line-through text-muted small">${{ product.originalPrice }}</span>
+                        <span class="product-price fs-5 fw-bold text-danger">${{ product.price }}</span>
                     } @else {
-                        <span class="product-price">${{ product.price }}</span>
+                        <span class="product-price fs-5 fw-bold">${{ product.price }}</span>
                     }
                   </div>
-                  <button class="btn btn-hero-black btn-sm">Add to cart</button>
+                  <button class="btn btn-dark rounded-0 px-3 fw-bold text-uppercase small">Add to cart</button>
                 </div>
               </div>
 
             </div>
+          </div>
+        } @empty {
+          <div class="col-12 text-center py-5">
+            <h3 class="text-muted">No trending deals found right now!</h3>
           </div>
         }
       </div>

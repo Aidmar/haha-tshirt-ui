@@ -14,10 +14,9 @@ import { ImageSelector } from "../../image-selector/image-selector";
 export class EditCategory {
   id = input<string>();
   categoryService = inject(CategoryService);
-  private categoryRef = this.categoryService.getCategoryByid(this.id);
+  
   router = inject(Router);
 
-  categoryResponse = this.categoryRef.value;
 
   editCategoryForm = new FormGroup({
     categoryName: new FormControl<string>('', {
@@ -32,11 +31,7 @@ export class EditCategory {
   });
 
 
-  effectRef = effect(()=> {
-    this.editCategoryForm.controls.categoryName.patchValue(this.categoryResponse()?.name ?? '')
-    this.editCategoryForm.controls.urlHandle.patchValue(this.categoryResponse()?.urlHandle ?? '')
 
-  })
 
   constructor()
   {

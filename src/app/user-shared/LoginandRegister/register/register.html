@@ -9,7 +9,7 @@
             <p class="text-muted">Your wardrobe upgrade starts here.</p>
           </div>
 
-          <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+          <form #form="ngForm" >
             
             <div class="mb-3">
               <label class="form-label fw-bold uppercase small">Username</label>
@@ -20,19 +20,18 @@
                 <input 
                   type="text" 
                   name="username"
-                  [(ngModel)]="model.username"
-                  #username="ngModel"
+
                   class="form-control border-bold border-start-0 ps-0" 
                   placeholder="Choose a username"
                   required
                   minlength="3">
               </div>
-              @if (username.invalid && (username.dirty || username.touched)) {
+     
                 <div class="error-box mt-1">
-                  @if (username.errors?.['required']) { <span>Username is required</span> }
-                  @if (username.errors?.['minlength']) { <span>Must be at least 3 characters</span> }
+                  <span>Username is required</span> 
+                <span>Must be at least 3 characters</span> 
                 </div>
-              }
+              
             </div>
 
             <div class="mb-3">
@@ -44,19 +43,18 @@
                 <input 
                   type="email" 
                   name="email"
-                  [(ngModel)]="model.email"
-                  #email="ngModel"
+  
                   class="form-control border-bold border-start-0 ps-0" 
                   placeholder="name@example.com"
                   required
                   email>
               </div>
-              @if (email.invalid && (email.dirty || email.touched)) {
+ 
                 <div class="error-box mt-1">
-                  @if (email.errors?.['required']) { <span>Email is required</span> }
-                  @if (email.errors?.['email']) { <span>Please enter a valid email (@)</span> }
+               <span>Email is required</span> 
+                 <span>Please enter a valid email (@)</span> 
                 </div>
-              }
+              
             </div>
 
             <div class="mb-4">
@@ -68,19 +66,17 @@
                 <input 
                   type="password" 
                   name="password"
-                  [(ngModel)]="model.password"
-                  #password="ngModel"
                   class="form-control border-bold border-start-0 ps-0" 
                   placeholder="At least 6 characters"
                   required
                   minlength="6">
               </div>
-              @if (password.invalid && (password.dirty || password.touched)) {
+            
                 <div class="error-box mt-1">
-                  @if (password.errors?.['required']) { <span>Password is required</span> }
-                  @if (password.errors?.['minlength']) { <span>Password must be 6+ characters</span> }
+                  <span>Password is required</span>
+               <span>Password must be 6+ characters</span>
                 </div>
-              }
+         
             </div>
 
             <button type="submit" [disabled]="!form.valid" class="btn btn-hero-orange w-100 py-3 fw-black mb-3">

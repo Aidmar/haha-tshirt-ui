@@ -5,28 +5,28 @@
         <i style="cursor: pointer" class="bi bi-arrow-left-circle-fill me-2"></i> BACK TO PRODUCTS
       </a>
 
-      <div class="form-card shadow-lg">
-        <div class="form-header">
-          <h2 class="mb-0">ADD NEW PRODUCT</h2>
+      <div class="form-card shadow-lg border-0">
+        <div class="form-header bg-dark text-white p-3 rounded-top">
+          <h2 class="mb-0 fs-4 text-uppercase fw-900">ADD NEW PRODUCT</h2>
         </div>
 
-        <div class="form-body p-3 p-md-5">
+        <div class="form-body p-3 p-md-5 bg-white rounded-bottom">
           <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
             <div class="row g-4">
               <div class="col-lg-8">
                 <div class="row">
                   <div class="col-md-7 mb-4">
-                    <label class="form-label">Product Title</label>
-                    <input type="text" class="form-control custom-input" formControlName="ProductTitle" />
+                    <label class="form-label fw-bold">Product Title</label>
+                    <input type="text" class="form-control custom-input" formControlName="ProductTitle" placeholder="e.g. Minimalist Watch"/>
                   </div>
 
                   <div class="col-md-5 mb-4">
-                    <label class="form-label">Price ($)</label>
+                    <label class="form-label fw-bold">Price ($)</label>
                     <input type="number" class="form-control custom-input" formControlName="Price" />
                   </div>
 
                   <div class="col-12 mb-4">
-                    <label class="form-label">Categories</label>
+                    <label class="form-label fw-bold">Categories (Hold Ctrl to select multiple)</label>
                     <select class="form-control custom-input" multiple formControlName="categories">
                       @for (category of categoriesRespone(); track category.id) {
                         <option [value]="category.id">{{ category.name }}</option>
@@ -35,98 +35,99 @@
                   </div>
 
                   <div class="col-12 mb-4">
-                    <label class="form-label">Featured Image URL</label>
+                    <label class="form-label fw-bold">Featured Image URL</label>
                     <div class="input-group">
-                      <input type="text" class="form-control custom-input" placeholder="Paste URL here..." formControlName="imageUrl" />
-                      <a class="btn btn-black-action" type="button" (click)="openImageSelector()">
+                      <input type="text" class="form-control custom-input" placeholder="Paste URL or Select Image" formControlName="imageUrl" />
+                      <button class="btn btn-dark" type="button" (click)="openImageSelector()">
                         SELECT <i class="bi bi-upload ms-1"></i>
-                      </a>
+                      </button>
                     </div>
                   </div>
 
                   <div class="col-12 mb-4">
-                    <label class="form-label">URL Handle</label>
-                    <input type="text" class="form-control custom-input" placeholder="pro-wireless-headphones" formControlName="urlHandle" />
+                    <label class="form-label fw-bold">URL Handle</label>
+                    <input type="text" class="form-control custom-input" placeholder="minimalist-watch" formControlName="urlHandle" />
                   </div>
 
                   <div class="col-12 mb-4">
-                    <div class="inventory-container p-4 rounded shadow-sm border bg-white">
+                    <div class="inventory-container p-4 rounded border bg-light">
                       <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0 text-primary fw-bold">Inventory & Variants</h5>
-                        <button type="button" class="btn btn-sm btn-dark px-3" (click)="addVariant()">
+                        <h5 class="mb-0 text-dark fw-bold text-uppercase small">Inventory & Variants</h5>
+                        <button type="button" class="btn btn-sm btn-dark" (click)="addVariant()">
                           <i class="bi bi-plus-lg me-1"></i> ADD VARIANT
                         </button>
                       </div>
                       
                       <div formArrayName="variants">
-                        <div *ngFor="let variant of variants.controls; let i=index" [formGroupName]="i" class="row g-3 mb-3 align-items-end pb-3 border-bottom border-light">
-                          
-                          <div class="col-md-4">
-                            <label class="small fw-bold">Color</label>
-                            <select class="form-select custom-input" formControlName="colorId">
-                              <option value="" disabled>Select Color</option>
-                              @for (color of colorsResponse(); track color.id) {
-                                <option [value]="color.id">{{ color.name }}</option>
-                              }
-                            </select>
+                        @for (variant of variants.controls; let i=$index; track i) {
+                          <div [formGroupName]="i" class="row g-3 mb-3 align-items-end pb-3 border-bottom border-secondary-subtle">
+                            <div class="col-md-4">
+                              <label class="small fw-bold">Color</label>
+                              <select class="form-select custom-input" formControlName="colorId">
+                                <option value="" disabled>Select Color</option>
+                                @for (color of colorsResponse(); track color.id) {
+                                  <option [value]="color.id">{{ color.name }}</option>
+                                }
+                              </select>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="small fw-bold">Size</label>
+                              <select class="form-select custom-input" formControlName="sizeId">
+                                <option value="" disabled>Select Size</option>
+                                @for (size of sizesResponse(); track size.id) {
+                                  <option [value]="size.id">{{ size.name }}</option>
+                                }
+                              </select>
+                            </div>
+                            <div class="col-md-3">
+                              <label class="small fw-bold">Qty</label>
+                              <input type="number" class="form-control custom-input" formControlName="quantity">
+                            </div>
+                            <div class="col-md-2">
+                              <button type="button" class="btn btn-outline-danger w-100" (click)="removeVariant(i)">
+                                <i class="bi bi-trash"></i>
+                              </button>
+                            </div>
                           </div>
-
-                          <div class="col-md-3">
-                            <label class="small fw-bold">Size</label>
-                            <select class="form-select custom-input" formControlName="sizeId">
-                              <option value="" disabled>Select Size</option>
-                              @for (size of sizesResponse(); track size.id) {
-                                <option [value]="size.id">{{ size.name }}</option>
-                              }
-                            </select>
-                          </div>
-
-                          <div class="col-md-3">
-                            <label class="small fw-bold">Quantity</label>
-                            <input type="number" class="form-control custom-input" formControlName="quantity" placeholder="Stock">
-                          </div>
-
-                          <div class="col-md-2">
-                            <button type="button" class="btn btn-outline-danger w-100" (click)="removeVariant(i)">
-                              <i class="bi bi-trash"></i>
-                            </button>
-                          </div>
-                        </div>
+                        }
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 mb-4">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control custom-input" rows="6" placeholder="Enter details..." formControlName="description"></textarea>
+                    <label class="form-label fw-bold">Description</label>
+                    <textarea class="form-control custom-input" rows="4" formControlName="description"></textarea>
                   </div>
                 </div>
               </div>
 
               <div class="col-lg-4">
                 <div class="preview-sidebar sticky-lg-top">
-                  <label class="form-label text-center d-block fw-bold">Live Preview</label>
-                  
-                  <div class="preview-frame-new shadow-sm bg-white rounded overflow-hidden">
+                  <label class="form-label text-center d-block fw-bold text-uppercase small">Live Preview</label>
+                  <div class="preview-frame-new shadow-sm bg-white rounded overflow-hidden border">
                     @if(addProductForm.get('imageUrl')?.value) {
-                      <img [src]="addProductForm.get('imageUrl')?.value" alt="Preview" class="img-fluid main-preview-img" />
+                      <img [src]="addProductForm.get('imageUrl')?.value" alt="Preview" class="img-fluid" style="width: 100%; height: 250px; object-fit: cover;" />
                     } @else {
-                      <div class="no-image-placeholder p-5 text-center">
+                      <div class="no-image-placeholder p-5 text-center bg-light">
                         <i class="bi bi-image text-muted display-4"></i>
                         <p class="small text-muted mt-2">No Image Selected</p>
                       </div>
                     }
-                  </div>
-
-                  <div class="mt-4 d-grid gap-2 d-lg-none">
-                    <button type="submit" class="btn btn-register-solid py-3">PUBLISH</button>
+                    <div class="p-3">
+                      <h6 class="fw-bold mb-1">{{ addProductForm.get('ProductTitle')?.value || 'Product Title' }}</h6>
+                      <p class="text-orange-link fw-bold mb-0">${{ addProductForm.get('Price')?.value || '0.00' }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-12 mt-4 d-none d-lg-flex gap-3 border-top pt-4">
-                <button type="submit" class="btn btn-register-solid flex-grow-1 py-3" [disabled]="addProductForm.invalid">
-                  PUBLISH PRODUCT
+              <div class="col-12 mt-4 d-flex gap-3 border-top pt-4">
+                <button type="submit" class="btn btn-register-solid flex-grow-1 py-3 fw-bold" [disabled]="addProductForm.invalid || productService.addProductStatus() === 'loading'">
+                  @if (productService.addProductStatus() === 'loading') {
+                    <span class="spinner-border spinner-border-sm me-2"></span> PUBLISHING...
+                  } @else {
+                    PUBLISH PRODUCT
+                  }
                 </button>
               </div>
             </div>

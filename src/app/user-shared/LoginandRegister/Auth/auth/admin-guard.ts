@@ -4,23 +4,22 @@ import { AuthService } from '../../auth-service';
 import { map, take } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
- 
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // We listen to the roles stream
+
+  authService.loadUserFromStorage();
+
   return authService.userRoles$.pipe(
-    take(1), // Take the current value and stop listening
+    take(1), 
     map(roles => {
       if (roles.includes('Writer')) {
-        return true; // Let them in!
+        return true; 
       }
 
-      // If they are not an Admin, kick them to home
-      alert('Access Denied: Admins Only');
-      router.navigateByUrl('/');
+      alert('Access Denied: You need Admin (Writer) permissions to view this page.');
+      router.navigateByUrl('/login');
       return false;
     })
   );
-
 };

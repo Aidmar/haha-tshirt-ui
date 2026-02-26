@@ -8,7 +8,6 @@
             alt="Product Name"
             class="img-fluid main-detail-img"
           />
-          <div class="detail-image-accent"></div>
         </div>
       </div>
 
@@ -54,25 +53,25 @@
               </div>
             </div>
 
-<div class="row g-3 align-items-end">
-  <div class="col-4 col-md-3">
-    <label class="selection-label">Qty</label>
-    <input 
-      type="number" 
-      class="form-control qty-input" 
-      #qtyInput 
-      value="1" 
-      min="1" />
-  </div>
-  <div class="col-8 col-md-9">
-    <button 
-      class="btn btn-hero-orange w-100 py-3" 
-      [disabled]="!selectedSizeId() || !selectedColorId()"
-      (click)="onSubmit(qtyInput.value)"> <i class="bi bi-cart3 me-2"></i> ADD TO CART
-    </button>
-  </div>
-</div>
-
+            <div class="row g-3 align-items-end">
+              <div class="col-4 col-md-3">
+                <label class="selection-label">Qty</label>
+                <input 
+                  type="number" 
+                  class="form-control qty-input" 
+                  #qtyInput 
+                  value="1" 
+                  min="1" />
+              </div>
+              <div class="col-8 col-md-9">
+                <button 
+                  class="btn btn-hero-orange w-100 py-3" 
+                  [disabled]="!selectedSizeId() || !selectedColorId()"
+                  (click)="onSubmit(qtyInput.value)"> 
+                  <i class="bi bi-cart3 me-2"></i> ADD TO CART
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

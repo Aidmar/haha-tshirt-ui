@@ -4,60 +4,81 @@
       <a
         class="text-decoration-none text-black fw-bold mb-3 d-inline-block"
         [routerLink]="['/admin/category']"
+        style="cursor: pointer;"
       >
         <i class="bi bi-arrow-left"></i> BACK TO LIST
       </a>
 
-      <div class="form-card shadow-sm">
-        <div class="form-header">
-          <h2 class="mb-0">Create Category</h2>
+      <div class="form-card shadow-sm border-0">
+        <div class="form-header bg-dark text-white p-3 rounded-top">
+          <h2 class="mb-0 fs-4 text-uppercase fw-900">Create Category</h2>
         </div>
 
-        <div class="form-body p-4 p-md-5">
+        <div class="form-body p-4 p-md-5 bg-white rounded-bottom">
           <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
+            
             <div class="mb-4">
-              <label for="name" class="form-label">Category Name</label>
+              <label for="name" class="form-label fw-bold text-uppercase small">Category Name</label>
               <input
                 type="text"
+                id="name"
                 class="form-control custom-input"
                 placeholder="e.g. T-shirt"
                 formControlName="categoryName"
               />
-              @if (
-                categoryNameformControl.touched && categoryNameformControl.hasError('required')
-              ) {
-                <p class="text-danger text-small">Category Name is required.</p>
-              }
-              @if (
-                categoryNameformControl.touched && categoryNameformControl.hasError('maxlength')
-              ) {
-                <p class="text-danger text-small">Category Name cannot exceed 50 characters.</p>
+              @if (categoryNameformControl.touched && categoryNameformControl.errors) {
+                <div class="mt-1">
+                  @if (categoryNameformControl.hasError('required')) {
+                    <p class="text-danger small mb-0 fw-bold">Category Name is required.</p>
+                  }
+                  @if (categoryNameformControl.hasError('maxlength')) {
+                    <p class="text-danger small mb-0 fw-bold">Max 10 characters for this demo.</p>
+                  }
+                </div>
               }
             </div>
 
             <div class="mb-4">
-              <label for="urlHandle" class="form-label">URL Handle</label>
+              <label for="urlHandle" class="form-label fw-bold text-uppercase small">URL Handle</label>
               <input
                 type="text"
+                id="urlHandle"
                 class="form-control custom-input"
                 placeholder="e.g. t-shirt-deals"
                 formControlName="urlHandle"
               />
-              @if (
-                urlHandleformControl.touched && urlHandleformControl.hasError('required')
-              ) {
-                <p class="text-danger text-small">URL Handle is required.</p>
-              }
-              @if (
-                urlHandleformControl.touched && urlHandleformControl.hasError('maxlength')
-              ) {
-                <p class="text-danger text-small">URL Handle cannot exceed 50 characters.</p>
+              @if (urlHandleformControl.touched && urlHandleformControl.errors) {
+                <div class="mt-1">
+                  @if (urlHandleformControl.hasError('required')) {
+                    <p class="text-danger small mb-0 fw-bold">URL Handle is required.</p>
+                  }
+                  @if (urlHandleformControl.hasError('maxlength')) {
+                    <p class="text-danger small mb-0 fw-bold">Max 20 characters for this demo.</p>
+                  }
+                </div>
               }
             </div>
 
             <div class="mt-5">
-              <button type="submit" class="btn btn-register-solid w-100 py-3" [disabled]="addCategoryForm.valid === false">SAVE CATEGORY</button>
+              <button 
+                type="submit" 
+                class="btn btn-register-solid w-100 py-3 fw-bold shadow-sm" 
+                [disabled]="addCategoryForm.invalid || categoryService.addCategoryStatus() === 'loading'"
+              >
+                @if (categoryService.addCategoryStatus() === 'loading') {
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  SAVING TO LOCALSTORAGE...
+                } @else {
+                  <i class="bi bi-check-circle me-2"></i> SAVE CATEGORY
+                }
+              </button>
             </div>
+
+            @if (categoryService.addCategoryStatus() === 'error') {
+              <div class="alert alert-danger mt-3 small">
+                An error occurred while saving. Please try again.
+              </div>
+            }
           </form>
         </div>
       </div>

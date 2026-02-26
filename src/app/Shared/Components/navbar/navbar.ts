@@ -25,25 +25,26 @@ export class Navbar implements OnInit {
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
-  ngOnInit(): void {
-    // Listen to the user stream from AuthService
-    this.authService.user$.subscribe({
-      next: (user) => {
-        this.username = user;
-        // Tell Angular to refresh the HTML immediately
-        this.cdr.detectChanges();
-        console.log('Navbar User Update:', this.username);
-      }
-    });
-    this.authService.userRoles$.subscribe(roles => {
-      this.showAdmin = roles.includes('Writer'); // Only true if 'Admin' is in the token
-      this.cdr.detectChanges();
-    });
-  }
+  
 
+ngOnInit(): void {
+
+  this.authService.loadUserFromStorage();
+
+  this.authService.user$.subscribe(user => {
+    this.username = user;
+    this.cdr.detectChanges();
+  });
+
+  this.authService.userRoles$.subscribe(roles => {
+  
+    this.showAdmin = roles.includes('Writer'); 
+    this.cdr.detectChanges();
+  });
+}
     goHome() {
     if (this.router.url === '/') {
-      // Already on home, force reload
+   
       window.location.reload();
     } else {
       this.router.navigate(['/']);

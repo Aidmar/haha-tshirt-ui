@@ -10,26 +10,27 @@ import { ProductService } from '../Services/product-service';
 })
 export class ProductList {
 
-  productService = inject(ProductService);
+productService = inject(ProductService);
 
-  getAllProductRef = this.productService.getAllProducts();
+  private productRef = this.productService.getAllProducts();
 
-  isLoading = this.getAllProductRef.isLoading;
-  error = this.getAllProductRef.error;
-  response = this.getAllProductRef.value;
+  isLoading = this.productRef.isLoading;
+  error = this.productRef.error;
+  response = this.productRef.value;
 
-  deleteProduct(id : string)
-  {
-  this.productService.deleteProduct(id).subscribe({
-    next : () => {
-      window.location.reload()
-    },
-       error : () => {
-        console.error("Something went wrong")
-      }
-  })
+  deleteProduct(id: string) {
+    if (confirm('Delete this product?')) {
+      this.productService.deleteProduct(id).subscribe({
+        next: () => {
+          console.log("Product removed from LocalStorage");
+        },
+        error: () => {
+          console.error("Something went wrong");
+        }
+      });
+    }
   }
-
-
-
 }
+
+
+

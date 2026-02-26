@@ -1,60 +1,60 @@
-@if(showImageSelector())
-{
-
+@if(showImageSelector()) {
 <div class="image-selector-overlay">
-  <div class="image-selector-container col-12 col-md-8 col-lg-6">
+  <div class="image-selector-container col-12 col-md-10 col-lg-8">
     
     <button (click)="hideImageSelector()" type="button" class="close-overlay-btn">
       <i class="bi bi-x-lg"></i>
     </button>
 
-    <div class="form-card shadow-lg">
-      <div class="form-header">
-        <h2 class="mb-0">SELECT / UPLOAD IMAGE</h2>
+    <div class="form-card shadow-lg border-0 rounded-4 overflow-hidden">
+      <div class="form-header bg-dark text-white p-3">
+        <h2 class="mb-0 fs-5 text-uppercase fw-bold">Select / Upload Image</h2>
       </div>
       
-      <div class="form-body p-4 p-md-5">
-        <form [formGroup]="imageSelectorUploadForm" (ngSubmit)="onSubmit()">
-          
-          <div class="upload-drop-zone mb-4" >
-            <input type="file" (change)="onFileSelected($event)"  >
-
-               <div class="row">
-            @for(image of images(); track image.id)
-            {
-           
-              <div class="col-6 col-md-4 col-lg-3 text-center mb-3" (click)="onSelectImage(image)" >
-                <img style="height: 100px;" [src]="image.url" [alt]="image.fileName" class="img-fluid">
-                <span>{{image.fileName}}</span>
+      <div class="form-body p-4 bg-white">
+        <div class="row">
+          <div class="col-md-5 border-end">
+            <h5 class="fw-bold small text-uppercase mb-3">New Upload</h5>
+            <form [formGroup]="imageSelectorUploadForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Choose File</label>
+                <input type="file" class="form-control" (change)="onFileSelected($event)">
               </div>
-         
-               }
-            </div>
-                 </div>
-         
 
-          <div class="row">
-            <div class="col-12 mb-3">
-              <label class="form-label">Image Title</label>
-              <input type="text" class="form-control custom-input"  formControlName="imageTitle" >
-            </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Image Title</label>
+                <input type="text" class="form-control custom-input" formControlName="imageTitle">
+              </div>
 
-            <div class="col-12 mb-4">
-              <label class="form-label">File Name</label>
-              <input type="text" class="form-control custom-input"  formControlName="fileName">
-            </div>
+              <div class="mb-4">
+                <label class="form-label small fw-bold">File Name</label>
+                <input type="text" class="form-control custom-input" formControlName="fileName">
+              </div>
+
+              <button type="submit" class="btn btn-dark w-100 py-2 fw-bold" [disabled]="imageSelectorUploadForm.invalid">
+                <i class="bi bi-cloud-arrow-up me-2"></i>UPLOAD
+              </button>
+            </form>
           </div>
 
-          <button type="submit" class="btn btn-register-solid w-100 py-3">
-            submit
-          </button>
-        </form>
+          <div class="col-md-7">
+            <h5 class="fw-bold small text-uppercase mb-3 ps-2">Existing Gallery</h5>
+            <div class="image-gallery-scroll px-2" style="max-height: 400px; overflow-y: auto;">
+              <div class="row g-2">
+                @for(image of images(); track image.id) {
+                  <div class="col-4 text-center mb-2">
+                    <div class="img-selectable-card" (click)="onSelectImage(image)">
+                      <img [src]="image.url" [alt]="image.fileName" class="img-fluid rounded border">
+                      <p class="small text-truncate mt-1 mb-0">{{image.fileName}}</p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
 }
-
