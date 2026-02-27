@@ -14,14 +14,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="mainNav">
+    <div class="collapse navbar-collapse" id="mainNav" #mainNav>
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" (click)="goHome()" style="cursor: pointer;">Home</a></li>
+      <a class="nav-link" (click)="goHome(); mainNav.classList.remove('show')" style="cursor: pointer;">Home</a>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['products/tshirts']">Products</a>
+          <a class="nav-link" [routerLink]="['products/tshirts']" (click)="mainNav.classList.remove('show')">Products</a>
         </li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['trending']">Trending & sales</a></li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['about']">About</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['trending']" (click)="mainNav.classList.remove('show')">Trending & sales</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['about']" (click)="mainNav.classList.remove('show')">About</a></li>
 
         @if (showAdmin) {
         <li class="nav-item dropdown">
@@ -29,24 +29,24 @@
             Admin Panel
           </a>
           <ul class="dropdown-menu border-0 shadow-sm">
-            <li><a class="dropdown-item" [routerLink]="['admin/category']">Category</a></li>
-            <li><a class="dropdown-item" [routerLink]="['admin/product']">Product</a></li>
+            <li><a class="dropdown-item" [routerLink]="['admin/category']" (click)="mainNav.classList.remove('show')">Category</a></li>
+            <li><a class="dropdown-item" [routerLink]="['admin/product']" (click)="mainNav.classList.remove('show')">Product</a></li>
           </ul>
         </li>
         }
       </ul>
 
       <div class="nav-actions d-flex align-items-center gap-3">
-        <a [routerLink]="['cart']" class="nav-icon-link position-relative me-2">
+        <a [routerLink]="['cart']" class="nav-icon-link position-relative me-2" (click)="mainNav.classList.remove('show')">
           <i class="bi bi-cart3 fs-5"></i>
           <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle cart-dot"></span>
         </a>
 
         @if (!username) {
-          <a class="btn btn-login-outline" [routerLink]="['login']">
+          <a class="btn btn-login-outline" [routerLink]="['login']" (click)="mainNav.classList.remove('show')">
             <i class="bi bi-person-fill me-1"></i> Login
           </a>
-          <a class="btn btn-register-solid" [routerLink]="['register']">
+          <a class="btn btn-register-solid" [routerLink]="['register']" (click)="mainNav.classList.remove('show')">
             <i class="bi bi-pencil-square me-1"></i> Register
           </a>
         } 

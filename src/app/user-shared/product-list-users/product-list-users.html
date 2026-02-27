@@ -59,7 +59,7 @@
                 <p class="product-desc text-truncate-2">{{ product.description }}</p>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                   <span class="product-price">${{ product.price }}</span>
-                  <button class="btn btn-hero-black btn-sm" >Add to cart</button>
+                  <button class="btn btn-hero-black btn-sm" [routerLink]="['/products/productDetails' , product.id]" >Add to cart</button>
                 </div>
               </div>
             </div>
