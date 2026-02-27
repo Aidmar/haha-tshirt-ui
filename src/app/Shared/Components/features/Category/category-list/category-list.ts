@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CategoryService } from '../category-service';
 import { RouterLink } from "@angular/router";
+import { ProductService } from '../../Product/Services/product-service';
 
 @Component({
   selector: 'app-category-list',
@@ -10,6 +11,7 @@ import { RouterLink } from "@angular/router";
 })
 export class CategoryList {
 private categoryService = inject(CategoryService);
+private productService = inject(ProductService);
 
   private categoryRef = this.categoryService.getAllCategory();
 
@@ -26,6 +28,14 @@ private categoryService = inject(CategoryService);
       });
     }
   }
+  resetAllData() {
+  if (confirm('This will delete all your custom changes and restore default items. Continue?')) {
+    this.productService.resetProducts();
+    this.categoryService.resetCategories();
+    
+    // Optional: Force a page reload to ensure everything is fresh
+    window.location.reload(); 
+  }
 
-
+  }
 }

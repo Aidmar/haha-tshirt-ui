@@ -85,5 +85,10 @@ this.categoryList.set(parsed);
     return of(undefined);
   }
 
+  resetCategories() {
+  localStorage.removeItem('demo_categories');
+  this.loadFromStorage(); // Reloads the seed data into the signal
+}
+
 
 }

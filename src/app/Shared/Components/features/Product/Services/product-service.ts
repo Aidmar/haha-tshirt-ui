@@ -381,4 +381,9 @@ export class ProductService {
   getSizes() {
     return this.sizes;
   }
+
+  resetProducts() {
+  localStorage.removeItem('demo_products');
+  this.loadFromStorage(); // Reloads the seed data into the signal
+}
 }
